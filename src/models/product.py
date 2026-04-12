@@ -23,6 +23,14 @@ class Product:
             raise ValidationError("Скидка долна быть в пределах 0.0 - 1.0")
         self._price = self._price * (1 - discount)
 
+    def check_stock(self):
+        return self._quantity
+
+    def update_stock(self, new_quantity):
+        if new_quantity < 0:
+            raise ValidationError("Количество не может быть отрицательным")
+        self._quantity = new_quantity
+
     @property
     def price(self):
         return self._price
