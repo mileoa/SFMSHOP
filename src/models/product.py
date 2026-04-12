@@ -1,0 +1,47 @@
+from models.exceptions import ValidationError
+
+
+class Product:
+    def __init__(self, name: str, price: float, quantity: int):
+        if price < 0.0:
+            raise ValidationError("Цена не может быть отрицательной")
+        self._price: float = price
+
+        self._name: str = name
+        self._quantity: int = quantity
+
+    def get_total_price(self) -> float:
+        return self._price * self._quantity
+
+    def set_price(self, price):
+        if price < 0:
+            raise ValidationError("Цена не может быть отрицательной")
+        self._price = price
+
+    @property
+    def price(self):
+        return self._price
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def quantity(self):
+        return self._quantity
+
+    def __str__(self):
+        return f"Товар: {self._name}, Цена: {self._price} руб., Количество: {self._quantity}"
+
+    def __repr__(self):
+        return f"Product('{self._name}', {self._price}, {self._quantity})"
+
+    def __lt__(self, other: "Product") -> bool:
+        if isinstance(other, Product):
+            return self._price < other.price
+        return False
+
+    def __eq__(self, other: "Product") -> bool:
+        if isinstance(other, Product):
+            return self._price == other.price and self._name == other.name
+        return False
