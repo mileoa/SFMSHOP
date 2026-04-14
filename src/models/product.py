@@ -11,7 +11,7 @@ class Product:
         self._quantity: int = quantity
 
     def get_total_price(self) -> float:
-        """Посчитать полную текущую цену"""
+        """Посчитать текущую цену"""
         return self._price * self._quantity
 
     def set_price(self, price):
