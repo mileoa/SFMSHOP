@@ -15,6 +15,7 @@ class Product:
         return self._price * self._quantity
 
     def set_price(self, price):
+        """Установить цену"""
         if price < 0:
             raise ValidationError("Цена не может быть отрицательной")
         self._price = price
