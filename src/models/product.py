@@ -20,6 +20,9 @@ class Product:
             raise ValidationError("Цена не может быть отрицательной")
         self._price = price
 
+    def calculate_shipping(self) -> float:
+        return max(round(0.01 * self.price, 2), 300.0)
+
     def apply_discount(self, discount: float):
         if discount < 0.0 or discount > 1.0:
             raise ValidationError("Скидка долна быть в пределах 0.0 - 1.0")
