@@ -2,26 +2,35 @@ from models.exceptions import ValidationError
 
 
 class Product:
-    def __init__(self, name: str, price: float, quantity: int):
+    def __init__(self, name: str, price: float, quantity: int, category: str):
         if price < 0.0:
             raise ValidationError("Цена не может быть отрицательной")
         self._price: float = price
 
         self._name: str = name
         self._quantity: int = quantity
+        self._category = category
 
     def get_total_price(self) -> float:
+        """Посчитать текущую цену"""
         return self._price * self._quantity
 
     def set_price(self, price):
+        """Установить цену"""
         if price < 0:
             raise ValidationError("Цена не может быть отрицательной")
         self._price = price
+
+    def calculate_shipping(self) -> float:
+        return max(round(0.01 * self.price, 2), 300.0)
 
     def apply_discount(self, discount: float):
         if discount < 0.0 or discount > 1.0:
             raise ValidationError("Скидка долна быть в пределах 0.0 - 1.0")
         self._price = self._price * (1 - discount)
+
+    def get_category(self) -> str:
+        return self._category
 
     def check_stock(self):
         return self._quantity

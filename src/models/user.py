@@ -10,6 +10,7 @@ class User:
         self._email = email
 
     def get_info(self) -> str:
+        """Получить информацию о пользователе"""
         return f"Пользователь: {self._name}, Email: {self._email}"
 
     def set_email(self, email: str) -> None:
