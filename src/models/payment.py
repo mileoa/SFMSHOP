@@ -1,8 +1,10 @@
 class Payment:
     def __init__(self, amount):
+        """Создать платеж"""
         self.amount = amount
 
     def process_payment(self):
+        """Провести оплату"""
         raise NotImplementedError("Метод должен быть переопределен")
 
 
